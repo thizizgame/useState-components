@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // problem 1 
+        // const body = document.getElementsByTagName('body')[0];
+        // const text = document.createElement('p');
+        // const button = document.createElement('button');
+        // button.innerText = 'Change to Hi there!';
+        // text.innerText = "1 Text baisan";
+        // button.addEventListener('click', ()=> {
+        //     text.innerText = "Hi there!";
+        // });
+        // body.appendChild(text);
+        // body.appendChild(button);
+
+        // problem 2
+        // const body = document.getElementsByTagName('body')[0];
+        // const bg = document.createElement('div');
+        // const button = document.createElement('button');
+        // const arr = ['black', 'yellow', 'blue', 'brown'];
+        // let k = 0;
+        // bg.style.backgroundColor = arr[k];
+        // bg.style = 'width:500px;height:150px;border: 1px solid #000;';
+        // button.innerText = 'Change Color';
+        // button.addEventListener('click', ()=>{
+        //     bg.style.backgroundColor = arr[k];
+        //     k++;
+        //     if (k == arr.length) {
+        //         k = 0;
+        //     }
+        // });
+        //  body.appendChild(bg);
+        // body.appendChild(button);
+
+        //problem 3
+        // const body = document.getElementsByTagName('body')[0];
+        // const button = document.createElement('button');
+        // const ul = document.createElement('ul');
+        // const apple = document.createElement('li');
+        // apple.innerText = 'Apple';
+        // button.innerText = 'add banana';
+        // button.addEventListener('click', ()=>{
+        //     const banana = document.createElement('li');
+        //     banana.innerText = 'Banana';
+        //     ul.appendChild(banana);
+        // });
+        // ul.appendChild(apple);
+        // body.appendChild(ul);
+        // body.appendChild(button);
+
+        // problem 4 
+        // const body = document.getElementsByTagName('body')[0];
+        // const button = document.createElement('button');
+        // const text = document.createElement('p');
+        // text.innerText = "Hello World";
+        // button.innerText = 'Hide';
+
+        // button.addEventListener('click', ()=>{
+        //     if(button.innerText == 'Hide')
+        // {
+        //     button.innerText = 'Show';
+        //     text.innerText = '';
+        // }else{
+        //     button.innerText = "Hide";
+        //     text.innerText = 'Hello World';
+        // }
+        // });
+        // body.appendChild(button);
+        // body.appendChild(text);
+
+        //problem 5
+
+        // const body = document.getElementsByTagName('body')[0];
+        // const text = document.createElement('p');
+        // const button = document.createElement('button');
+        // let k = 0;
+        // text.innerText = 'Clicked ' + k + ' times';
+        // button.innerText = 'Click Me';
+        // button.addEventListener('click', ()=>{
+        //     k++;
+        //     text.innerText = 'Clicked ' + k + ' times';
+        // });
+        // body.appendChild(text);
+        // body.appendChild(button);
+
+        //problem 6
+
+        // const body = document.getElementsByTagName('body')[0];
+        // const arr = [0, 4, 16, 55];
+        // const button = document.createElement('button');
+        // const text = document.createElement('p');
+        // text.innerText = '';
+        // button.innerText = 'Show Numbers > 5';
+        // button.addEventListener('click', ()=>{
+        //    text.innerText = arr.filter((element)=>{
+        //         return element > 5;
+        //     });
+
+        // });
+
+        // body.appendChild(text);
+        // body.appendChild(button);
+
+        //problem 8
+        // const body = document.getElementsByTagName('body')[0];
+        // const input = document.createElement('input');
+        // const ul = document.createElement('ul');
+        // const button = document.createElement('button');
+        // button.innerText = 'Add item';
+        // button.addEventListener('click', ()=>{
+        //     const li = document.createElement('li');
+        //     li.innerHTML = input.value;
+        //     ul.appendChild(li);
+        // });
+        // body.appendChild(ul);
+        // body.appendChild(input);
+        // body.appendChild(button);
+
+        //problem 9
+
+        // const body = document.getElementsByTagName('body')[0];
+        // const arr = [12, 23, 44, 16];
+        // const sort = document.createElement('button');
+        // const text = document.createElement('p');
+        // text.innerText = arr;
+        // sort.innerText = 'Sort';
+        // sort.addEventListener('click', ()=>{
+        //     text.innerText = arr.sort((element2, element1)=>{
+        //         return element2 - element1;
+        //     });
+        // });
+
+        // body.appendChild(text);
+        // body.appendChild(sort);
+
+        //problem 10 
+
+        // const body = document.getElementsByTagName('body')[0];
+        // const input = document.createElement('input');
+        // const text = document.createElement('p');
+        // text.innerHTML = 'character counter: ' + k;
+        // input.addEventListener('change', ()=>{
+        //     text.innerHTML = 'character counter: ' + input.value.length;
+        // });
+        // body.appendChild(input);
+        // body.appendChild(text);
+
+        //problem 11
+        const body = document.getElementsByTagName('body')[0];
+        const text = document.createElement('p');
+        const arr = [
+            {
+                name: "Apple",
+                category: "Fruits",
+            },
+            {
+                name: "Potato",
+                category: "Vegetables",
+            },
+            {
+                name: "Banana",
+                category: "Fruits",
+            },
+            {
+                name: "Tomato",
+                category: "Vegetables",
+            }
+        ];
+        const newArr = document.createElement('p');
+        const select = document.createElement('select');
+        const option1 = document.createElement('option');
+        const option2 = document.createElement('option');
+        const option3 = document.createElement('option');
+        text.innerText = "Select filter";
+        newArr.innerText = arr.map((elements) => {
+            return elements.name;
+        });
+        option1.innerText = 'Show All';
+        option2.innerText = 'Vegetables';
+        option3.innerText = 'Fruits';
+        select.addEventListener('change', (event) => {
+            const filteredArr = arr.filter((el) => {
+                if (select.value == option1.innerText) return true
+                return el.category === select.value
+            })
+            newArr.innerText = filteredArr.map((elements) => {
+                return elements.name;
+            });
+
+            console.log(select.value)
+        })
+        select.appendChild(option1);
+        select.appendChild(option2);
+        select.appendChild(option3);
+
+        body.appendChild(text);
+        body.appendChild(select);
+        body.appendChild(newArr);
+
+        //problem 12
+        // const body = document.getElementsByTagName('body')[0];
+        
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="counter"></div>
+    <button class="button" onclick="startTimer()">Start</button>
+    <button class="button" onclick="stopTime()">Stop</button>
+    <button class="button" onclick="resetTime()">Reset</button>
+    <script>
+        const counterDiv = document.getElementById("counter");
+        let second = 0;
+        let minut = 0;
+        let hour = 0;
+        let sTen = "0";
+        let mTen = "0";
+        let hTen = "0";
+        counterDiv.innerText = hTen + hour + " " + mTen + minut + " " + sTen + second;
+
+        function addSecond() {
+            second++;
+            if (second > 9) {
+                sTen = '';
+            }
+            if (minut > 9) {
+                mTen = '';
+            }
+            if (hour > 9) {
+                hTen = '';
+            }
+            if (second > 59) {
+                minut++;
+                second = 0;
+                sTen = "0";
+            }
+            if (minut > 59) {
+                hour++;
+                minut = 0;
+                mTen = "0";
+            }
+            counterDiv.innerText = hTen + hour + " " + mTen + minut + " " + sTen + second;
+        }
+
+        let interval = setInterval(addSecond, 1000);
+        clearInterval(interval);
+
+
+
+        function startTimer() {
+            clearInterval(interval);
+            interval = setInterval(addSecond, 1000);
+        }
+        function stopTime() {
+            clearInterval(interval);
+        }
+        function resetTime() {
+            clearInterval(interval);
+            second = 0;
+            minut = 0;
+            hour = 0;
+            sTen = "0";
+            mTen = "0";
+            hTen = "0";
+            counterDiv.innerText = hTen + hour + " " + mTen + minut + " " + sTen + second;
+
+        }
+    </script>
+</body>
+
+</html>

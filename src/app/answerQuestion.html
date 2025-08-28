@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const body = document.getElementsByTagName('body')[0];
+        const button1 = document.createElement('button');
+        const button2 = document.createElement('button');
+        const button3 = document.createElement('button');
+        const button4 = document.createElement('button');
+        const start = document.createElement('button');
+        const text = document.createElement('p');
+        const question = ['Question 1', 'Question 2', 'Question 3', 'Question 4', 'Question 5']
+        const answer = [['Answer 1.1', 'Answer 1.2', 'Answer 1.3', 'Answer 1.4'], ['Answer 2.1', 'Answer 2.2', 'Answer 2.3', 'Anwer 2.4'], ['Answer 3.1', 'Answer 3.2', 'Answer 3.3', 'Answer 3.4'],['Answer 4.1', 'Answer 4.2', 'Answer 4.3', 'Answer 4.4'],['Answer 5.1', 'Answer 5.2', 'Answer 5.3', 'Answer 5.4']];
+        const result = [];
+        const correctResult = ['Answer 1.1', 'Answer 2.1', 'Answer 3.1', 'Answer 4.1', 'Answer 5.1'];
+        start.innerText = 'Start';
+        let i = 0;
+        let j = 0;
+        start.addEventListener('click', () => {
+            start.remove();
+            text.innerText = question[i];
+            button1.innerText = answer[i][j];
+            button2.innerText = answer[i][j + 1];
+            button3.innerText = answer[i][j + 2];
+            button4.innerText = answer[i][j + 3];
+            j = 0;
+            body.appendChild(text);
+            body.appendChild(button1);
+            body.appendChild(button2);
+            body.appendChild(button3);
+            body.appendChild(button4);
+        });
+        button1.addEventListener('click', () => {
+            result[i] = answer[i][j];
+            nextQuestion(i);
+
+        });
+        button2.addEventListener('click', () => {
+            result[i] = answer[i][j + 1];
+            nextQuestion(i);
+
+        });
+        button3.addEventListener('click', () => {
+            result[i] = answer[i][j + 2];
+            nextQuestion(i);
+
+        });
+        button4.addEventListener('click', () => {
+            result[i] = answer[i][j + 3];
+            nextQuestion(i);
+        });
+        function nextQuestion() {
+            if (i === question.length-1) {
+                
+                let k = 0;
+                let x = 0;
+                for(k=0;k<question.length;k++){
+                    if(result[k] === correctResult[k]){
+                        x++;
+                    }
+                }
+                x = x*100/question.length;
+                text.innerText = "ugsun hariult: " + result + "\n" + "zuv hariult: " + correctResult + "\n" + " dun: " + parseInt(x) + "%";
+                button1.remove();
+                button2.remove();
+                button3.remove();
+                button4.remove();
+            } else {
+                i++;
+                text.innerText = question[i];
+                button1.innerText = answer[i][j];
+                button2.innerText = answer[i][j + 1];
+                button3.innerText = answer[i][j + 2];
+                button4.innerText = answer[i][j + 3];
+                j = 0;
+                body.appendChild(text);
+                body.appendChild(button1);
+                body.appendChild(button2);
+                body.appendChild(button3);
+                body.appendChild(button4);
+            }
+        }
+        body.appendChild(start);
+    </script>
+</body>
+
+</html>
