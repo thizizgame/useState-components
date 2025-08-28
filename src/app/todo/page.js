@@ -1,5 +1,5 @@
 "use client"
-import { Task, Filtered } from "../components/";
+import { Task } from "@/components";
 import { useState } from "react";
 
 const Todo = () => {
@@ -7,7 +7,7 @@ const Todo = () => {
    const [inputValue, setinputValue] = useState("");
    const [filteredStatus,setFilteredStatus] = useState('all')
    const addTodo = (event) => {
-        setinputValue(event.target.value);
+        setinputValue(event.target.value);  
    }
    const addClicked = () =>{
         setTodos([...todos, {title:inputValue, isCompleted:false}]); 

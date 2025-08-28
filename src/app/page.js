@@ -1,4 +1,5 @@
-import { Box, Round, Card, Menu } from "./components";
+import { Card } from "@/components";
+
 
 const Home = () => {
   const cardData = [
@@ -20,9 +21,6 @@ const Home = () => {
       <div className="flex justify-between pl-10 pr-10 bg-amber-200 w-full h-20">
         <img src="https://images.rawpixel.com/image_png_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvdjEwNDktMjIucG5n.png"></img>
         <div className="flex text-black list-none">
-         <Menu title="Home"></Menu>
-         <Menu title="About"></Menu>
-         <Menu title="Contact"></Menu>
         </div>
       </div>
       <div className="text-center">
