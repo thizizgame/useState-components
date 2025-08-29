@@ -14,6 +14,11 @@ const Todo = () => {
         setTodos([...todos, {title:inputValue, isCompleted:false , id: uuidv4()}]); 
         setinputValue("");    
    }
+   const clickedEnter = (event) => {
+        if(event.key === "Enter"){
+            return addClicked();
+        }
+   }
    const handleCheck = (event, id)=>{
     setTodos(todos.map((el) => {
         if(el.id === id) {
@@ -23,7 +28,7 @@ const Todo = () => {
      } ))
    }
      const handleDeleteTodo = (id) => {
-        // alert("Deleting Task");
+        alert("Deleting Task");
         const newTodos = todos.filter((el) => el.id !== id)
         setTodos(newTodos);
 
@@ -65,7 +70,7 @@ return <div className="bg-amber-50 p-0 m-0 h-screen pt-20">
     <div className="text-black w-[377px] p-4 pt-6 pb-6 border-gray-100 shadow-lg m-auto bg-white">
         <p className="text-center font-semibold">To-Do List</p>
         <div className="flex mt-5">
-            <input  className="w-full mr-[6px] border-1" onChange={addTodo} value={inputValue}></input>
+            <input  className="w-full mr-[6px] border-1" onChange={addTodo} value={inputValue} onKeyDown={clickedEnter}></input>
             <button className="bg-black rounded-2xl text-white p-4 pt-1 pb-1" onClick={addClicked}>Add</button>
         </div>
         <div className="pt-5">
