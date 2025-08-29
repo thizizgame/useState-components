@@ -1,6 +1,7 @@
 "use client"
 import { Task } from "@/components";
 import { useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
 
 const Todo = () => {
    const [todos, setTodos] = useState([]);
@@ -10,20 +11,20 @@ const Todo = () => {
         setinputValue(event.target.value);  
    }
    const addClicked = () =>{
-        setTodos([...todos, {title:inputValue, isCompleted:false}]); 
+        setTodos([...todos, {title:inputValue, isCompleted:false , id: uuidv4()}]); 
         setinputValue("");    
    }
-   const handleCheck = (event, index)=>{
-    setTodos(todos.map((el,i) => {
-        if(i === index) {
+   const handleCheck = (event, id)=>{
+    setTodos(todos.map((el) => {
+        if(el.id === id) {
             el.isCompleted = event.target.checked
         }
         return el
      } ))
    }
-     const handleDeleteTodo = (index) => {
-        alert("Deleting Task");
-        const newTodos = todos.filter((el,i) => index !== i)
+     const handleDeleteTodo = (id) => {
+        // alert("Deleting Task");
+        const newTodos = todos.filter((el) => el.id !== id)
         setTodos(newTodos);
 
     }
@@ -74,7 +75,7 @@ return <div className="bg-amber-50 p-0 m-0 h-screen pt-20">
         </div>
         <div>
              {filteredData.map((el, index) => {
-                      return  <Task key={index} index={index} title={el.title} isChecked={el.isCompleted} handleCheck={handleCheck} handleDeleteTodo={handleDeleteTodo}></Task>
+                      return  <Task key={el.id} index={el.id} title={el.title} isChecked={el.isCompleted} handleCheck={handleCheck} handleDeleteTodo={handleDeleteTodo}></Task>
             })}
             <div className="flex justify-between items-center pt-4">
                 <p>{completedData.length} of {filteredData.length}</p>
