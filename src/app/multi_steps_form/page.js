@@ -1,7 +1,9 @@
 "use client";
 import React, { useState } from "react";
 
+
 const multiStepsForm = () => {
+ 
   const [step, setStep] = useState("step1");
   const [valid, setValid] = useState("");
   const [error, setError] = useState({
@@ -23,12 +25,12 @@ const multiStepsForm = () => {
     count: false,
   });
   const enter1 = (event) => {
-    if(event.key === "Enter"){
+    if (event.key === "Enter") {
       submit1(form);
     }
   }
   const enter2 = (event) => {
-    if(event.key === "Enter"){
+    if (event.key === "Enter") {
       submit2(form);
     }
   }
@@ -90,6 +92,8 @@ const multiStepsForm = () => {
   if (step === "step1") {
     return (
       <div className="m-0 p-0 bg-[#F4F4F4] h-screen text-black box-content pt-[140px] text-[14px]">
+       
++         
         <div className="flex flex-col gap-3 w-[500px] m-auto rounded-2xl shadow-sm p-[32px] bg-white">
           <img src="plogo.png" className="w-[60px]" />
           <h1 className="text-[26px] font-semibold">Join Us! 😎</h1>
@@ -155,12 +159,15 @@ const multiStepsForm = () => {
             Continue 1/3
           </button>
         </div>
+         
       </div>
+     
     );
   }
   if (step === "step2") {
     return (
       <div className="m-0 p-0 bg-[#F4F4F4] h-screen text-black box-content pt-[140px] text-[14px]">
+         
         <div className="flex flex-col gap-3 w-[500px] m-auto rounded-2xl shadow-sm p-[32px] bg-white">
           <img src="plogo.png" className="w-[60px]" />
           <h1 className="text-[26px] font-semibold">Join Us! 😎</h1>
@@ -252,6 +259,7 @@ const multiStepsForm = () => {
             </button>
           </div>
         </div>
+        
       </div>
     );
   }
@@ -259,6 +267,7 @@ const multiStepsForm = () => {
   if (step === "step3") {
     return (
       <div className="m-0 p-0 bg-[#F4F4F4] h-screen text-black box-content pt-[140px] text-[14px]">
+             
         <div className="flex flex-col gap-3 w-[500px] m-auto rounded-2xl shadow-sm p-[32px] bg-white">
           <img src="plogo.png" className="w-[60px]" />
           <h1 className="text-[26px] font-semibold">Join Us! 😎</h1>
@@ -292,6 +301,7 @@ const multiStepsForm = () => {
             </button>
           </div>
         </div>
+       
       </div>
     );
   }
