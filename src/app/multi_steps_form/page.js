@@ -24,6 +24,7 @@ const multiStepsForm = () => {
   });
 
   const submit1 = (event) => {
+
     setValid("Дээрх талбар хоосон байна");
     event.count = true;
     if (event.full === "" || event.last === "" || event.user === "") {
@@ -34,42 +35,48 @@ const multiStepsForm = () => {
       event.count = false;
       console.log(event.count);
     }
+
+
   };
   const submit2 = (event) => {
-    
+
     event.count = true;
-    if(event.email === "")
-    {
-      setError({...error, email: "Дээрх талбар хоосон байна"});
-       setStep("step2");
+    const newError = {};
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^(?:\+976)?(?:7|8|9)\d{7}$/;
+    if (event.email === "") {
+      newError.email = "Имэйл хаягаа оруулана уу";
+    } else if (!emailRegex.test(event.email)) {
+      newError.email = "Имэйл хаяг буруу байна";
+    } else {
+      newError.email = "";
     }
-    if(event.phone === "")
-    {
-      setError({...error, phone: "Дээрх талбар хоосон байна"});
-       setStep("step2");
+    if (event.phone === "") {
+      newError.phone = "Утасны дугаар оруулана уу";
+    } else if (!phoneRegex.test(event.phone)) {
+      newError.phone = "Утасны дугаар буруу байна";
+    } else {
+      newError.phone = "";
     }
-    if(event.passport === "")
-    {
-      setError({...error, passport: "Дээрх талбар хоосон байна"});
-       setStep("step2");
+
+    if (event.passport === "") {
+      newError.passport = "Нууц үгээ оруулана уу";
+    } else {
+      newError.passport = "";
     }
-    if(event.confirm === "")
-    {
-      setError({...error, confirm: "Дээрх талбар хоосон байна"});
-       setStep("step2");
-      
+    if (event.confirm === "") {
+      newError.confirm = "Нууц үгээ давтана уу";
+    } else if (event.confirm !== event.passport) {
+      newError.confirm = "Нууц үг ижил байх ёстой";
+    } else {
+      newError.confirm = "";
     }
-    if(event.passport !== event.confirm){
-      event.confirm = "";
-      setError({...error, 
-        confirm: "Нууц үг ижил байх ёстой",
-      });
-  setStep("step2");
+
+    setError(newError);
+    if (newError.email === "" && newError.phone === "" && newError.passport === "" && newError.confirm === "") {
+      setStep("step3");
+      event.count = false;
     }
-    
-    if (event.email !== "" && event.phone !== "" && event.passport  !== "" && event.confirm !== "") {
-        setStep("step3");
-    } 
   };
   if (step === "step1") {
     return (
@@ -162,7 +169,7 @@ const multiStepsForm = () => {
               })
             }
           ></input>
-            {form.email === "" && form.count ? (
+          {error.email !== "" && form.count ? (
             <p className="text-red-400">{error.email}</p>
           ) : (
             <p></p>
@@ -179,7 +186,7 @@ const multiStepsForm = () => {
               })
             }
           ></input>
-            {form.phone === "" && form.count ? (
+          {error.phone !== "" && form.count ? (
             <p className="text-red-400">{error.phone}</p>
           ) : (
             <p></p>
@@ -197,7 +204,7 @@ const multiStepsForm = () => {
               })
             }
           ></input>
-            {form.passport === "" && form.count ? (
+          {error.passport !== "" && form.count ? (
             <p className="text-red-400">{error.passport}</p>
           ) : (
             <p></p>
@@ -215,7 +222,7 @@ const multiStepsForm = () => {
               })
             }
           ></input>
-            {form.confirm === "" && form.count ? (
+          {error.confirm !== "" && form.count ? (
             <p className="text-red-400">{error.confirm}</p>
           ) : (
             <p></p>
