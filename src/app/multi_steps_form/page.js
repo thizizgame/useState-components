@@ -22,7 +22,16 @@ const multiStepsForm = () => {
     image: "",
     count: false,
   });
-
+  const enter1 = (event) => {
+    if(event.key === "Enter"){
+      submit1(form);
+    }
+  }
+  const enter2 = (event) => {
+    if(event.key === "Enter"){
+      submit2(form);
+    }
+  }
   const submit1 = (event) => {
 
     setValid("Дээрх талбар хоосон байна");
@@ -45,14 +54,14 @@ const multiStepsForm = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const phoneRegex = /^(?:\+976)?(?:7|8|9)\d{7}$/;
     if (event.email === "") {
-      newError.email = "Имэйл хаягаа оруулана уу";
+      newError.email = "Имэйл хаягаа оруулна уу";
     } else if (!emailRegex.test(event.email)) {
       newError.email = "Имэйл хаяг буруу байна";
     } else {
       newError.email = "";
     }
     if (event.phone === "") {
-      newError.phone = "Утасны дугаар оруулана уу";
+      newError.phone = "Утасны дугаар оруулна уу";
     } else if (!phoneRegex.test(event.phone)) {
       newError.phone = "Утасны дугаар буруу байна";
     } else {
@@ -60,7 +69,7 @@ const multiStepsForm = () => {
     }
 
     if (event.passport === "") {
-      newError.passport = "Нууц үгээ оруулана уу";
+      newError.passport = "Нууц үгээ оруулна уу";
     } else {
       newError.passport = "";
     }
@@ -132,6 +141,7 @@ const multiStepsForm = () => {
                 user: e.target.value,
               })
             }
+            onKeyDown={enter1}
           ></input>
           {form.user === "" && form.count ? (
             <p className="text-red-400">{valid}</p>
@@ -220,7 +230,7 @@ const multiStepsForm = () => {
                 ...form,
                 confirm: e.target.value,
               })
-            }
+            } onKeyDown={enter2}
           ></input>
           {error.confirm !== "" && form.count ? (
             <p className="text-red-400">{error.confirm}</p>
