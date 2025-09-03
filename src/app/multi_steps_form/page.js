@@ -108,6 +108,8 @@ const multiStepsForm = () => {
     if(newError.date === "")
     {
       setStep("step4");
+    }else{
+      setStep("step3");
     }
   }
   if (step === "step1") {
