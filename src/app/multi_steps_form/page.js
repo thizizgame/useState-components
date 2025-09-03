@@ -25,30 +25,52 @@ const multiStepsForm = () => {
     image: "",
   });
   const [preview, setPreview] = useState();
-  function handleImageChange(e) {
+   function handleImageChange(e) {
     const file = e.target.files[0];
-    const filePreview = URL.createObjectURL(file);
-    setPreview(filePreview);
+    if (file) {
+      const filePreview = URL.createObjectURL(file);
+      setPreview(filePreview);
+      setForm((prev) => ({
+        ...prev,
+        image: file, 
+      }));
+    }
   }
   const submit1 = (event) => {
     const newError = {};
+    const numberRegex = /\d/;
+
     if (event.full === "") {
       newError.full = "Enter your First Name";
+    } else if (numberRegex.test(event.full)) {
+      newError.full = "First name should not contain numbers";
     } else {
       newError.full = "";
     }
+
     if (event.last === "") {
       newError.last = "Enter your Last Name";
+    } else if (numberRegex.test(event.last)) {
+      newError.last = "Last name should not contain numbers";
     } else {
       newError.last = "";
     }
+
     if (event.user === "") {
       newError.user = "Enter your Username";
+    } else if (numberRegex.test(event.user)) {
+      newError.user = "Username should not contain numbers";
     } else {
       newError.user = "";
     }
+
     setError(newError);
-    if (newError.full === "" && newError.last === "" && newError.user === "") {
+
+    if (
+      newError.full === "" &&
+      newError.last === "" &&
+      newError.user === ""
+    ) {
       setStep("step2");
     }
   };
@@ -56,6 +78,8 @@ const multiStepsForm = () => {
     const newError = {};
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const phoneRegex = /^(?:\+976)?(?:7|8|9)\d{7}$/;
+    const specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/;
+
     if (event.email === "") {
       newError.email = "Имэйл хаягаа оруулна уу";
     } else if (!emailRegex.test(event.email)) {
@@ -63,6 +87,7 @@ const multiStepsForm = () => {
     } else {
       newError.email = "";
     }
+
     if (event.phone === "") {
       newError.phone = "Утасны дугаар оруулна уу";
     } else if (!phoneRegex.test(event.phone)) {
@@ -73,9 +98,12 @@ const multiStepsForm = () => {
 
     if (event.passport === "") {
       newError.passport = "Нууц үгээ оруулна уу";
+    } else if (!specialCharRegex.test(event.passport)) {
+      newError.passport = "Нууц үгэнд заавал 1 тэмдэгт оруулах ёстой";
     } else {
       newError.passport = "";
     }
+
     if (event.confirm === "") {
       newError.confirm = "Нууц үгээ давтана уу";
     } else if (event.confirm !== event.passport) {
@@ -85,6 +113,7 @@ const multiStepsForm = () => {
     }
 
     setError(newError);
+
     if (
       newError.email === "" &&
       newError.phone === "" &&
@@ -92,26 +121,32 @@ const multiStepsForm = () => {
       newError.confirm === ""
     ) {
       setStep("step3");
-      event.count = false;
+    }
+  };
+ 
+
+  const submit3 = (event) => {
+    const newError = {};
+
+    if (event.birthday === "") {
+      newError.date = "Please select a date";
+    } else {
+      newError.date = "";
+    }
+
+    if (!event.image) {
+      newError.image = "Please select a profile image";
+    } else {
+      newError.image = "";
+    }
+
+    setError(newError);
+
+    if (newError.date === "" && newError.image === "") {
+      setStep("step4");
     }
   };
 
-  const submit3 = (event) =>{
-    const newError = {};
-    
-    if(event.birthday === ""){
-      newError.date = "Please select a date";
-    }else{
-      newError.date === ""
-    }
-    setError(newError);
-    if(newError.date === "")
-    {
-      setStep("step4");
-    }else{
-      setStep("step3");
-    }
-  }
   if (step === "step1") {
     return (
       <div className="m-0 p-0 bg-[#F4F4F4] h-screen text-black box-content pt-[140px] text-[14px]">
@@ -251,29 +286,34 @@ const multiStepsForm = () => {
             Please provide all current information accurately.
           </p>
           Date of birth *<input type="date" value={form.birthday} onChange={(e) =>
-              setForm({
-                ...form,
-                birthday: e.target.value,
-              })}></input>
-              {error.date !== "" ? (
-        <p className="mt-2 text-red-400">{error.date}</p>
-      ) : (
-        <p></p>
-      )}
-          Profile image *
-
-          {preview ? (<img src={preview} className="h-40 w-full object-cover"/>) : (
-            <div className="bg-gray-400 h-40 flex items-center justify-center relative">
-            Add Image
-            <input
-              type="file"
-              value={form.image}
-              onChange={handleImageChange}
-              className="absolute opacity-0 inset-0"
-            ></input>
-          </div>
+            setForm({
+              ...form,
+              birthday: e.target.value,
+            })}></input>
+          {error.date !== "" ? (
+            <p className="mt-2 text-red-400">{error.date}</p>
+          ) : (
+            <p></p>
           )}
-          
+          Profile image *
+          {preview ? (
+            <img src={preview} className="h-40 w-full object-cover rounded-2xl" />
+          ) : (
+            <div className="bg-gray-400 h-40 flex items-center justify-center relative">
+              Add Image
+              <input
+                type="file"
+                onChange={handleImageChange} 
+                className="absolute opacity-0 inset-0"
+              />
+            </div>
+          )}
+          {error.image !== "" ? (
+            <p className="mt-2 text-red-400">{error.image}</p>
+          ) : (
+            <p></p>
+          )}
+
           <div className="flex gap-5">
             <button
               className="mt-[70px] bg-white text-black h-[44px] rounded-[5px] border-1 border-[#CBD5E1] w-[128px]"
