@@ -27,7 +27,6 @@ const multiStepsForm = () => {
   });
   const [preview, setPreview] = useState();
 
-  // -------- Validation functions (чинийх шиг үлдээсэн) ----------
   const submit1 = (event) => {
     const newError = {};
     const numberRegex = /\d/;
